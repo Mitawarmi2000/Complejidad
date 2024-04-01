@@ -19,7 +19,9 @@ def is_safe(board, row, col): # Verifica si es seguro colocar una reina en la po
             return False
 
     # YASSER APUNTABA A LA ESQUINA SUPERIOR IZQUIERDA
-
+    for i, j in zip(range(row, -1, 1), range(col, -1, 1)): 
+        if board[i][j] == 1:
+            return False
 
     # ADRIAN APUNTABA A LA ESQUINA INFERIOR IZQUIERDA
 
