@@ -10,15 +10,19 @@ def is_safe(board, row, col): # Verifica si es seguro colocar una reina en la po
         if board[i][col] == 1: # 
             return False
 
-    for i, j in zip(range(row, -1, -1), range(col, -1, -1)):  # Verificar la diagonal superior izquierda
+    for i, j in zip(range(row, -1, -1), range(col, -1, -1)):  # APUNTABA A LA ESQUINA INFERIOR DERECHA
         if board[i][j] == 1:
             return False
 
-    for i, j in zip(range(row, 6, 1), range(col, -1, -1)):  # Verificar la diagonal inferior izquierda
+    for i, j in zip(range(row, 6, 1), range(col, -1, -1)):  # APUNTABA A LA ESQUINA SUPERIOR DERECHA
         if board[i][j] == 1:
             return False
 
-    
+    # YASSER APUNTABA A LA ESQUINA SUPERIOR IZQUIERDA
+
+
+    # ADRIAN APUNTABA A LA ESQUINA INFERIOR IZQUIERDA
+
     return True
 
 def solve_n_queens_util(board, col):  # Función auxiliar para resolver el problema de las 4 reinas utilizando backtracking
