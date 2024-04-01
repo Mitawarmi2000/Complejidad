@@ -1,0 +1,62 @@
+import matplotlib.pyplot as plt
+
+def is_safe(board, row, col): # Verifica si es seguro colocar una reina en la posición (row, col)
+
+    for i in range(col):  # Verificar la fila
+        if board[row][i] == 1:
+            return False
+
+    for i in range(row): # Veridicar la columna
+        if board[i][col] == 1: # 
+            return False
+
+    for i, j in zip(range(row, -1, -1), range(col, -1, -1)):  # Verificar la diagonal superior izquierda
+        if board[i][j] == 1:
+            return False
+
+    for i, j in zip(range(row, 6, 1), range(col, -1, -1)):  # Verificar la diagonal inferior izquierda
+        if board[i][j] == 1:
+            return False
+
+    
+    return True
+
+def solve_n_queens_util(board, col):  # Función auxiliar para resolver el problema de las 4 reinas utilizando backtracking
+
+    if col >= 6:  # Si todas las reinas están colocadas correctamente, retorna True
+        return True
+
+    for i in range(6):  # Probar cada fila en esta columna
+        if is_safe(board, i, col):
+            board[i][col] = 1 # Si es seguro colocar una reina en esta posición, hacerlo
+
+            if solve_n_queens_util(board, col + 1) == True: # Recursivamente intentar colocar el resto de las reinas
+                return True
+
+            board[i][col] = 0 # Si colocar una reina en la posición actual no lleva a una solución, retroceder y probar otra posición
+
+    return False # Si no se puede colocar la reina en ninguna fila en esta columna, entonces retorna False
+
+def solve_n_queens():  # Función principal para resolver el problema de las 4 reinas
+
+    board = [[0]*6 for _ in range(6)] # Crear un tablero 4x4 inicializado con ceros
+
+    if solve_n_queens_util(board, 0) == False:  # Llamar a la función auxiliar para encontrar la solución
+        print("No hay solución")
+        return False
+
+    print("Solución encontrada:") # Imprimir la solución
+    for i in range(6):
+        for j in range(6):
+            print(board[i][j], end=" ")
+        print()
+
+    plt.imshow(board, cmap='binary')  # Graficar el tablero con las reinas
+    plt.title('Tablero con las 5 reinas') # Titulo que aparece arriba del tablero
+    plt.xticks([])
+    plt.yticks([])
+    plt.show()
+
+    return True
+
+solve_n_queens() # Llamar a la función principal
